@@ -12,11 +12,11 @@ const BookingForm = ({ handleSubmit }) => {
   const [time, setTime] = useState("");
   const [pickupWeather, setPickupWeather] = useState(null);
   const [destinationWeather, setDestinationWeather] = useState(null);
-  const [isEditing, setIsEditing] = useState(false); // Track edit state
-  const [bookings, setBookings] = useState([]); // Store all bookings
-  const [isBookingSubmitted, setIsBookingSubmitted] = useState(false); // Track if booking is submitted
+  const [isEditing, setIsEditing] = useState(false); 
+  const [bookings, setBookings] = useState([]); 
+  const [isBookingSubmitted, setIsBookingSubmitted] = useState(false); 
 
-  // Fetch weather for pickup location
+  // Fetch weather for the pickup location
   useEffect(() => {
     if (pickup) {
       fetchWeather(pickup)
@@ -25,7 +25,7 @@ const BookingForm = ({ handleSubmit }) => {
     }
   }, [pickup]);
 
-  // Fetch weather for destination location
+  // Fetch weather for the destination location
   useEffect(() => {
     if (destination) {
       fetchWeather(destination)
@@ -36,7 +36,6 @@ const BookingForm = ({ handleSubmit }) => {
     }
   }, [destination]);
 
-  // Validation function
   const validateForm = () => {
     if (!pickup || !destination || !date || !time) {
       toast.error("Please fill in all required fields.");
@@ -51,7 +50,6 @@ const BookingForm = ({ handleSubmit }) => {
     return true;
   };
 
-  // Form submit handler
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -63,7 +61,7 @@ const BookingForm = ({ handleSubmit }) => {
       const booking = { pickup, destination, date, time };
       
       if (isEditing) {
-        // Update existing booking
+        
         const updatedBookings = bookings.map((b) =>
           b.id === isEditing ? booking : b
         );
@@ -71,25 +69,23 @@ const BookingForm = ({ handleSubmit }) => {
         toast.success("Booking updated successfully!");
         setIsEditing(false);
       } else {
-        // Add new booking
+        
         setBookings([...bookings, { ...booking, id: Date.now() }]);
         toast.success("Booking successful!");
       }
 
-      // Clear form after submission
       setPickup("");
       setDestination("");
       setDate("");
       setTime("");
 
-      // Show booking summary and hide form
       setIsBookingSubmitted(true);
     } catch (err) {
       toast.error("Something went wrong. Please try again.");
     }
   };
 
-  // Edit booking handler
+  // Editing the booking handler
   const handleEdit = (booking) => {
     setPickup(booking.pickup);
     setDestination(booking.destination);
@@ -99,14 +95,13 @@ const BookingForm = ({ handleSubmit }) => {
     setIsBookingSubmitted(false); 
   };
 
-  // Delete booking handler
+  // Delete the booking handler
   const handleDelete = (id) => {
     const updatedBookings = bookings.filter((booking) => booking.id !== id);
     setBookings(updatedBookings);
     toast.success("Booking cancelled!");
   };
 
-  // Back to form handler
   const handleNewBooking = () => {
     setIsBookingSubmitted(false); 
   };
@@ -114,7 +109,6 @@ const BookingForm = ({ handleSubmit }) => {
   return (
     <div className="flex items-center justify-center ">
       <ToastContainer />
-      {/* Conditional rendering: Show booking summary or form */}
       {isBookingSubmitted ? (
         <div className="bg-gray-700 p-6 rounded-lg shadow-lg text-white">
         <h2 className="text-2xl font-semibold text-gray-300 mb-4">Booking Summary</h2>
@@ -197,7 +191,6 @@ const BookingForm = ({ handleSubmit }) => {
             {isEditing ? "Update Booking" : "Book Ride"}
           </button>
 
-          {/* Display Weather Information */}
           {pickupWeather && (
             <div className="text-white">
               <h3>Pickup Weather:</h3>

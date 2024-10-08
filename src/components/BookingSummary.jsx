@@ -1,5 +1,3 @@
-// src/components/BookingSummary.js
-
 
 const BookingSummary = ({ bookingDetails, handleEdit, handleCancel }) => (
     <div className="p-4 bg-gray-400 rounded">

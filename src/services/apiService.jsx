@@ -1,4 +1,3 @@
-// src/services/apiService.js
 import axios from 'axios';
 
 export const fetchLocationSuggestions = async (query) => {

@@ -1,4 +1,3 @@
-// src/App.js
 import { useContext, useState } from 'react';
 import BookingForm from './components/BookingForm';
 import BookingSummary from './components/BookingSummary';
