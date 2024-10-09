@@ -48,14 +48,14 @@ RideIn integrates with the **OpenWeatherMap API** to provide live weather update
 ## Screenshots
 
 ### Main Booking Screen:
-![RideIn Main Screen](./assets/ridein.png))
+(./assets/ridein.png))
 
 
 ## Installation & Setup
 
 To run the RideIn project locally, follow these steps:
 
-### Prerequisites
+### Install the React vite app
 
 Make sure you have the following installed:
 - Vite (or use `npm init vite@latest` to create a Vite project)
