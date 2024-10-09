@@ -1,9 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { fetchWeather } from "../services/weatherService";
 import { toast, ToastContainer } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css"; 
-
-
 
 const BookingForm = ({ handleSubmit }) => {
   const [pickup, setPickup] = useState("");
@@ -15,24 +13,42 @@ const BookingForm = ({ handleSubmit }) => {
   const [isEditing, setIsEditing] = useState(false); 
   const [bookings, setBookings] = useState([]); 
   const [isBookingSubmitted, setIsBookingSubmitted] = useState(false); 
+  const [lastError, setLastError] = useState(null); 
 
-  // Fetch weather for the pickup location
+  const typingTimeoutRef = useRef(null);
+
+  // Helper function that helps to show error only once
+  const showErrorOnce = (message) => {
+    if (lastError !== message) {
+      setLastError(message);
+      toast.error(message);
+    }
+  };
+
+  //Implementing a debounced function for fetching weather
+  const debouncedFetchWeather = (location, setWeatherState) => {
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
+    }
+
+    typingTimeoutRef.current = setTimeout(() => {
+      fetchWeather(location)
+        .then((data) => setWeatherState(data))
+        .catch(() => showErrorOnce(`Error fetching weather for ${location}`));
+    }, 1000); 
+  };
+
+  // Fetches weather for pickup location
   useEffect(() => {
     if (pickup) {
-      fetchWeather(pickup)
-        .then((data) => setPickupWeather(data))
-        .catch(() => toast.error("Error fetching weather for pickup location"));
+      debouncedFetchWeather(pickup, setPickupWeather);
     }
   }, [pickup]);
 
-  // Fetch weather for the destination location
+  // Fetches weather for destination location
   useEffect(() => {
     if (destination) {
-      fetchWeather(destination)
-        .then((data) => setDestinationWeather(data))
-        .catch(() =>
-          toast.error("Error fetching weather for destination location")
-        );
+      debouncedFetchWeather(destination, setDestinationWeather);
     }
   }, [destination]);
 
@@ -85,7 +101,7 @@ const BookingForm = ({ handleSubmit }) => {
     }
   };
 
-  // Editing the booking handler
+  // Edits the booking handler
   const handleEdit = (booking) => {
     setPickup(booking.pickup);
     setDestination(booking.destination);
@@ -95,7 +111,7 @@ const BookingForm = ({ handleSubmit }) => {
     setIsBookingSubmitted(false); 
   };
 
-  // Delete the booking handler
+  // Deletes the booking handler
   const handleDelete = (id) => {
     const updatedBookings = bookings.filter((booking) => booking.id !== id);
     setBookings(updatedBookings);
@@ -104,6 +120,8 @@ const BookingForm = ({ handleSubmit }) => {
 
   const handleNewBooking = () => {
     setIsBookingSubmitted(false); 
+    setPickupWeather(null); 
+  setDestinationWeather(null);
   };
 
   return (
@@ -177,7 +195,7 @@ const BookingForm = ({ handleSubmit }) => {
                     type="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
-                    className="border rounded-2xl px-4 py-2 w-full cursor-pointer" // Add cursor-pointer for visual feedback
+                    className="border rounded-2xl px-4 py-2 w-full cursor-pointer" 
                 />
                 </div>
 
@@ -187,22 +205,10 @@ const BookingForm = ({ handleSubmit }) => {
                     type="time"
                     value={time}
                     onChange={(e) => setTime(e.target.value)}
-                    className="border rounded-2xl px-4 py-2 w-full cursor-pointer" // Add cursor-pointer for visual feedback
+                    className="border rounded-2xl px-4 py-2 w-full cursor-pointer" 
                 />
                 </div>
 
-           {/* <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            className="border rounded-2xl px-4 py-2 w-full"
-          />
-          <input
-            type="time"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-            className="border rounded-2xl px-4 py-2 w-full"
-          />  */}
           <button
             type="submit"
             className="bg-gray-900 text-white px-4 py-2 rounded-full"
