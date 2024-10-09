@@ -44,13 +44,11 @@ RideIn integrates with the **OpenWeatherMap API** to provide live weather update
 - **Notifications**: React Toastify
 - **Deployment**: Vercel
 
-## Screenshots
+## App Screenshot
 
 ### Main Booking Screen:
-![RideIn Main Screen](#)
+![RideIn Main Screen](./assets/ridein.png))
 
-### Weather Integration:
-![Weather Integration](#)
 
 ## Installation & Setup
 
