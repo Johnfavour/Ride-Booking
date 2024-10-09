@@ -35,7 +35,7 @@ const BookingForm = ({ handleSubmit }) => {
       fetchWeather(location)
         .then((data) => setWeatherState(data))
         .catch(() => showErrorOnce(`Error fetching weather for ${location}`));
-    }, 1000); 
+    }, 2000); 
   };
 
   useEffect(() => {
