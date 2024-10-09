@@ -65,16 +65,15 @@ Make sure you have the following installed:
 1. **Clone the repository:**
 
    ```bash
-   git clone (https://github.com/Johnfavour/Ride-Booking.git)
+   git clone https://github.com/Johnfavour/Ride-Booking.git
    cd Ride-booking
 2. **Install dependencies:**
    npm install
 
 3. **Environment Variables:**
 
-You need to create a `.env` file at the root of the project with the following variable, For Vite-based projects, environment variables are prefixed with VITE_:
+You need to create a `.env` file at the root of the project with the following variable. For Vite-based projects, environment variables are prefixed with VITE_, like the following example below
 
-```bash
 VITE_MY_API_KEY=your_openweathermap_api_key   
 
 
