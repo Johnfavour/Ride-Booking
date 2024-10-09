@@ -17,7 +17,7 @@ Welcome to **RideIn**, a ride-booking platform that allows users to book rides b
 
 ## Live Demo
 
-You can access the live application here: [https://ride-booking.vercel.app/](#)
+You can access the live application here: [RideIn Live Link](#https://ride-booking.vercel.app/)
 
 ## Features
 
