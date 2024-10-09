@@ -132,6 +132,7 @@ const BookingForm = ({ handleSubmit }) => {
           className="bg-gray-700 p-6 rounded-3xl shadow-md space-y-4"
         >
           <div>
+          <img src="/ride.png" alt="Logo" className="h-6 absolute ml-9 pl-9 mt-1.5" />
           <h1 className="text-3xl font-bold mb-6 text-white flex items-center justify-center">RideIn</h1>
             <label className="text-gray-300 mb-1">Pickup Location</label>
             <input
