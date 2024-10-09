@@ -8,7 +8,7 @@ Welcome to **RideIn**, a ride-booking platform that allows users to book rides b
 - [Features](#features)
 - [API Integration](#api-integration)
 - [Technologies](#technologies)
-- [App Screenshot](#screenshots)
+- [Screenshots](#screenshots)
 - [Installation & Setup](#installation--setup)
 - [Environment Variables](#environment-variables)
 - [Usage](#usage)
@@ -45,7 +45,7 @@ RideIn integrates with the **OpenWeatherMap API** to provide live weather update
 - **Notifications**: React Toastify
 - **Deployment**: Vercel
 
-## App Screenshot
+## Screenshots
 
 ### Main Booking Screen:
 ![RideIn Main Screen](./assets/ridein.png))
