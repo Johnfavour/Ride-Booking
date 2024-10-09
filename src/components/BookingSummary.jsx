@@ -40,7 +40,7 @@ const BookingSummary = ({ bookings, onEdit, onDelete, onNewBooking }) => {
   );
 };
 
-// Adding propTypes validation
+// Adding propTypes validations
 BookingSummary.propTypes = {
   bookings: PropTypes.arrayOf(
     PropTypes.shape({

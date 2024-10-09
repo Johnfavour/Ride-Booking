@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { fetchWeather } from "../services/weatherService";
 import { toast, ToastContainer } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css"; 
-import BookingSummary from './BookingSummary'; // Import the BookingSummary component
+import BookingSummary from './BookingSummary'; 
 
 const BookingForm = ({ handleSubmit }) => {
   const [pickup, setPickup] = useState("");
@@ -17,6 +17,8 @@ const BookingForm = ({ handleSubmit }) => {
   const [lastError, setLastError] = useState(null); 
 
   const typingTimeoutRef = useRef(null);
+
+  
 
 
   const showErrorOnce = (message) => {
@@ -35,7 +37,7 @@ const BookingForm = ({ handleSubmit }) => {
       fetchWeather(location)
         .then((data) => setWeatherState(data))
         .catch(() => showErrorOnce(`Error fetching weather for ${location}`));
-    }, 2000); 
+    }, 1000); 
   };
 
   useEffect(() => {
