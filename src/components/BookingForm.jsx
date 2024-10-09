@@ -172,7 +172,7 @@ const BookingForm = ({ handleSubmit }) => {
             />
           </div>
             <div className="mb-4">
-                <label className="text-gray-300 mb-1">Select Date</label>
+                <label className="text-gray-300 mb-1">Date</label>
                 <input
                     type="date"
                     value={date}
@@ -182,7 +182,7 @@ const BookingForm = ({ handleSubmit }) => {
                 </div>
 
                 <div className="mb-4">
-                <label className="text-gray-300 mb-1">Select Time</label>
+                <label className="text-gray-300 mb-1">Time</label>
                 <input
                     type="time"
                     value={time}
