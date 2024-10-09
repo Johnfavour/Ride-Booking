@@ -24,7 +24,6 @@ You can access the live application here: [https://ride-booking.vercel.app/](#)
 - Book a ride with a specific pickup and destination.
 - Real-time weather updates for both pickup and destination locations.
 - Form validation to ensure accurate and complete ride information.
-- Dynamic updating of form background based on weather conditions.
 - Mobile-friendly design and responsive layout for all devices.
 - Interactive map displayed above the booking form for visualizing locations (optional aesthetic enhancement).
 
