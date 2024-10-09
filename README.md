@@ -49,6 +49,7 @@ RideIn integrates with the **OpenWeatherMap API** to provide live weather update
 
 ### Main Booking Screen:
 ![image alt](https://github.com/Johnfavour/Ride-Booking/blob/38dabbc503c009126f7f468c2a674a0145a7ccac/ride1.png)
+![image alt](https://github.com/Johnfavour/Ride-Booking/blob/8b44292041d027c5c8726636a61b4871feecfd1d/ride%20(2).png)
 
 
 ## Installation & Setup
