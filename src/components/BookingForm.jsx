@@ -151,10 +151,10 @@ const BookingForm = ({ handleSubmit }) => {
           className="bg-gray-700 p-6 rounded-3xl shadow-md space-y-4"
         >
           <div>
+          <label className="text-gray-300 mb-1">Pickup Location</label>
             <input
               type="text"
               id="pickup"
-              placeholder="Pickup Location"
               value={pickup}
               onChange={(e) => setPickup(e.target.value)}
               className="border rounded-2xl px-4 py-2 w-full"
@@ -162,17 +162,36 @@ const BookingForm = ({ handleSubmit }) => {
           </div>
 
           <div>
+          <label className="text-gray-300 mb-1">Destination</label>
             <input
               type="text"
               id="destination"
-              placeholder="Destination"
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
               className="border rounded-2xl px-4 py-2 w-full"
             />
           </div>
+            <div className="mb-4">
+                <label className="text-gray-300 mb-1">Select Date</label>
+                <input
+                    type="date"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                    className="border rounded-2xl px-4 py-2 w-full cursor-pointer" // Add cursor-pointer for visual feedback
+                />
+                </div>
 
-          <input
+                <div className="mb-4">
+                <label className="text-gray-300 mb-1">Select Time</label>
+                <input
+                    type="time"
+                    value={time}
+                    onChange={(e) => setTime(e.target.value)}
+                    className="border rounded-2xl px-4 py-2 w-full cursor-pointer" // Add cursor-pointer for visual feedback
+                />
+                </div>
+
+           {/* <input
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
@@ -183,7 +202,7 @@ const BookingForm = ({ handleSubmit }) => {
             value={time}
             onChange={(e) => setTime(e.target.value)}
             className="border rounded-2xl px-4 py-2 w-full"
-          />
+          />  */}
           <button
             type="submit"
             className="bg-gray-900 text-white px-4 py-2 rounded-full"
