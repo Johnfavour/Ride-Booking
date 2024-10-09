@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { fetchWeather } from "../services/weatherService";
 import { toast, ToastContainer } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css"; 
+import BookingSummary from './BookingSummary'; // Import the BookingSummary component
 
 const BookingForm = ({ handleSubmit }) => {
   const [pickup, setPickup] = useState("");
@@ -17,7 +18,7 @@ const BookingForm = ({ handleSubmit }) => {
 
   const typingTimeoutRef = useRef(null);
 
-  // Helper function that helps to show error only once
+
   const showErrorOnce = (message) => {
     if (lastError !== message) {
       setLastError(message);
@@ -25,7 +26,6 @@ const BookingForm = ({ handleSubmit }) => {
     }
   };
 
-  //Implementing a debounced function for fetching weather
   const debouncedFetchWeather = (location, setWeatherState) => {
     if (typingTimeoutRef.current) {
       clearTimeout(typingTimeoutRef.current);
@@ -38,14 +38,12 @@ const BookingForm = ({ handleSubmit }) => {
     }, 1000); 
   };
 
-  // Fetches weather for pickup location
   useEffect(() => {
     if (pickup) {
       debouncedFetchWeather(pickup, setPickupWeather);
     }
   }, [pickup]);
 
-  // Fetches weather for destination location
   useEffect(() => {
     if (destination) {
       debouncedFetchWeather(destination, setDestinationWeather);
@@ -77,7 +75,6 @@ const BookingForm = ({ handleSubmit }) => {
       const booking = { pickup, destination, date, time };
       
       if (isEditing) {
-        
         const updatedBookings = bookings.map((b) =>
           b.id === isEditing ? booking : b
         );
@@ -85,7 +82,6 @@ const BookingForm = ({ handleSubmit }) => {
         toast.success("Booking updated successfully!");
         setIsEditing(false);
       } else {
-        
         setBookings([...bookings, { ...booking, id: Date.now() }]);
         toast.success("Booking successful!");
       }
@@ -94,14 +90,12 @@ const BookingForm = ({ handleSubmit }) => {
       setDestination("");
       setDate("");
       setTime("");
-
       setIsBookingSubmitted(true);
     } catch (err) {
-      toast.error("Something went wrong. Please try again.");
+      toast.error(`Something went wrong. Please try again: ${err.message}`);
     }
   };
 
-  // Edits the booking handler
   const handleEdit = (booking) => {
     setPickup(booking.pickup);
     setDestination(booking.destination);
@@ -111,7 +105,6 @@ const BookingForm = ({ handleSubmit }) => {
     setIsBookingSubmitted(false); 
   };
 
-  // Deletes the booking handler
   const handleDelete = (id) => {
     const updatedBookings = bookings.filter((booking) => booking.id !== id);
     setBookings(updatedBookings);
@@ -121,55 +114,23 @@ const BookingForm = ({ handleSubmit }) => {
   const handleNewBooking = () => {
     setIsBookingSubmitted(false); 
     setPickupWeather(null); 
-  setDestinationWeather(null);
+    setDestinationWeather(null);
   };
 
   return (
     <div className="flex items-center justify-center ">
       <ToastContainer />
       {isBookingSubmitted ? (
-        <div className="bg-gray-700 p-6 rounded-lg shadow-lg text-white">
-        <h2 className="text-2xl font-semibold text-gray-300 mb-4">Booking Summary</h2>
-        {bookings.length === 0 ? (
-          <p className="text-gray-600">No bookings yet</p>
-        ) : (
-            <ul>
-              {bookings.map((booking) => (
-                <li key={booking.id} className="p-4 border-b">
-                  <p>Pickup: {booking.pickup}</p>
-                  <p>Destination: {booking.destination}</p>
-                  <p>Date: {booking.date}</p>
-                  <p>Time: {booking.time}</p>
-                  <button
-                    className="bg-yellow-600 text-white font-semibold px-4 py-2 rounded hover:bg-yellow-700 transition-colors duration-300 mt-5 "
-                    onClick={() => handleEdit(booking)}
-                    >
-                    Edit
-                    </button>
-                    <button
-                    className="bg-red-600 text-white font-semibold px-4 py-2 rounded-md ml-3 hover:bg-red-700 transition-colors duration-300"
-                    onClick={() => handleDelete(booking.id)}
-                    >
-                    Delete
-                </button>
-                </li>
-              ))}
-            </ul>
-          )}
-          <button
-            className="bg-gray-500 text-white px-4 py-2 rounded-full mt-4 w-full hover:bg-gray-800"
-            onClick={handleNewBooking}
-          >
-            New Booking
-          </button>
-        </div>
+        <BookingSummary 
+          bookings={bookings}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+          onNewBooking={handleNewBooking}
+        />
       ) : (
-        <form
-          onSubmit={onSubmit}
-          className="bg-gray-700 p-6 rounded-3xl shadow-md space-y-4"
-        >
+        <form onSubmit={onSubmit} className="bg-gray-700 p-6 rounded-3xl shadow-md space-y-4">
           <div>
-          <label className="text-gray-300 mb-1">Pickup Location</label>
+            <label className="text-gray-300 mb-1">Pickup Location</label>
             <input
               type="text"
               id="pickup"
@@ -180,7 +141,7 @@ const BookingForm = ({ handleSubmit }) => {
           </div>
 
           <div>
-          <label className="text-gray-300 mb-1">Destination</label>
+            <label className="text-gray-300 mb-1">Destination</label>
             <input
               type="text"
               id="destination"
@@ -189,25 +150,25 @@ const BookingForm = ({ handleSubmit }) => {
               className="border rounded-2xl px-4 py-2 w-full"
             />
           </div>
-            <div className="mb-4">
-                <label className="text-gray-300 mb-1">Date</label>
-                <input
-                    type="date"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    className="border rounded-2xl px-4 py-2 w-full cursor-pointer" 
-                />
-                </div>
+          <div className="mb-4">
+            <label className="text-gray-300 mb-1">Date</label>
+            <input
+              type="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              className="border rounded-2xl px-4 py-2 w-full cursor-pointer" 
+            />
+          </div>
 
-                <div className="mb-4">
-                <label className="text-gray-300 mb-1">Time</label>
-                <input
-                    type="time"
-                    value={time}
-                    onChange={(e) => setTime(e.target.value)}
-                    className="border rounded-2xl px-4 py-2 w-full cursor-pointer" 
-                />
-                </div>
+          <div className="mb-4">
+            <label className="text-gray-300 mb-1">Time</label>
+            <input
+              type="time"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+              className="border rounded-2xl px-4 py-2 w-full cursor-pointer" 
+            />
+          </div>
 
           <button
             type="submit"
