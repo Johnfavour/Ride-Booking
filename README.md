@@ -8,7 +8,7 @@ Welcome to **RideIn**, a ride-booking platform that allows users to book rides b
 - [Features](#features)
 - [API Integration](#api-integration)
 - [Technologies](#technologies)
-- [Screenshots](#screenshots)
+- [Screenshot](#screenshots)
 - [Installation & Setup](#installation--setup)
 - [Environment Variables](#environment-variables)
 - [Usage](#usage)
@@ -44,7 +44,7 @@ RideIn integrates with the **OpenWeatherMap API** to provide live weather update
 - **Notifications**: React Toastify
 - **Deployment**: Vercel
 
-## App Screenshot
+## Screenshot
 
 ### Main Booking Screen:
 ![RideIn Main Screen](./assets/ridein.png))
@@ -57,7 +57,6 @@ To run the RideIn project locally, follow these steps:
 ### Prerequisites
 
 Make sure you have the following installed:
-- Node.js
 - Vite (or use `npm init vite@latest` to create a Vite project)
 
 ### Step-by-Step Setup
