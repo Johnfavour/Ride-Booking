@@ -34,12 +34,6 @@ RideIn integrates with the **OpenWeatherMap API** to provide live weather update
 - **API Documentation**: [OpenWeatherMap API](https://openweathermap.org/api)
 - **API Key**: You'll need your own API key to run this project locally.
 
-## Environment Variables
-
-You need to create a `.env` file at the root of the project with the following variable, For Vite-based projects, environment variables are prefixed with VITE_:
-
-```bash
-VITE_MY_API_KEY=your_openweathermap_api_key
 
 ## Technologies
 
@@ -76,7 +70,12 @@ Make sure you have the following installed:
 2. **Install dependencies:**
    npm install
 
-   
+3. **Environment Variables:**
+
+You need to create a `.env` file at the root of the project with the following variable, For Vite-based projects, environment variables are prefixed with VITE_:
+
+```bash
+VITE_MY_API_KEY=your_openweathermap_api_key   
 
 
 
