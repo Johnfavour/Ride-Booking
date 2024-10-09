@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { fetchWeather } from "../services/weatherService";
-import { toast, ToastContainer } from "react-toastify"; 
-import "react-toastify/dist/ReactToastify.css"; 
-import BookingSummary from './BookingSummary'; 
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import BookingSummary from "./BookingSummary";
 
 const BookingForm = ({ handleSubmit }) => {
   const [pickup, setPickup] = useState("");
@@ -11,15 +11,12 @@ const BookingForm = ({ handleSubmit }) => {
   const [time, setTime] = useState("");
   const [pickupWeather, setPickupWeather] = useState(null);
   const [destinationWeather, setDestinationWeather] = useState(null);
-  const [isEditing, setIsEditing] = useState(false); 
-  const [bookings, setBookings] = useState([]); 
-  const [isBookingSubmitted, setIsBookingSubmitted] = useState(false); 
-  const [lastError, setLastError] = useState(null); 
+  const [isEditing, setIsEditing] = useState(false);
+  const [bookings, setBookings] = useState([]);
+  const [isBookingSubmitted, setIsBookingSubmitted] = useState(false);
+  const [lastError, setLastError] = useState(null);
 
   const typingTimeoutRef = useRef(null);
-
-  
-
 
   const showErrorOnce = (message) => {
     if (lastError !== message) {
@@ -37,7 +34,7 @@ const BookingForm = ({ handleSubmit }) => {
       fetchWeather(location)
         .then((data) => setWeatherState(data))
         .catch(() => showErrorOnce(`Error fetching weather for ${location}`));
-    }, 1000); 
+    }, 1000);
   };
 
   useEffect(() => {
@@ -75,7 +72,7 @@ const BookingForm = ({ handleSubmit }) => {
 
     try {
       const booking = { pickup, destination, date, time };
-      
+
       if (isEditing) {
         const updatedBookings = bookings.map((b) =>
           b.id === isEditing ? booking : b
@@ -103,8 +100,8 @@ const BookingForm = ({ handleSubmit }) => {
     setDestination(booking.destination);
     setDate(booking.date);
     setTime(booking.time);
-    setIsEditing(booking.id); 
-    setIsBookingSubmitted(false); 
+    setIsEditing(booking.id);
+    setIsBookingSubmitted(false);
   };
 
   const handleDelete = (id) => {
@@ -114,24 +111,28 @@ const BookingForm = ({ handleSubmit }) => {
   };
 
   const handleNewBooking = () => {
-    setIsBookingSubmitted(false); 
-    setPickupWeather(null); 
+    setIsBookingSubmitted(false);
+    setPickupWeather(null);
     setDestinationWeather(null);
   };
 
   return (
-    <div className="flex items-center justify-center ">
+    <div className="flex items-center justify-center mt-20">
       <ToastContainer />
       {isBookingSubmitted ? (
-        <BookingSummary 
+        <BookingSummary
           bookings={bookings}
           onEdit={handleEdit}
           onDelete={handleDelete}
           onNewBooking={handleNewBooking}
         />
       ) : (
-        <form onSubmit={onSubmit} className="bg-gray-700 p-6 rounded-3xl shadow-md space-y-4">
+        <form
+          onSubmit={onSubmit}
+          className="bg-gray-700 p-6 rounded-3xl shadow-md space-y-4"
+        >
           <div>
+          <h1 className="text-3xl font-bold mb-6 text-white flex items-center justify-center">RideIn</h1>
             <label className="text-gray-300 mb-1">Pickup Location</label>
             <input
               type="text"
@@ -158,7 +159,7 @@ const BookingForm = ({ handleSubmit }) => {
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="border rounded-2xl px-4 py-2 w-full cursor-pointer" 
+              className="border rounded-2xl px-4 py-2 w-full cursor-pointer"
             />
           </div>
 
@@ -168,7 +169,7 @@ const BookingForm = ({ handleSubmit }) => {
               type="time"
               value={time}
               onChange={(e) => setTime(e.target.value)}
-              className="border rounded-2xl px-4 py-2 w-full cursor-pointer" 
+              className="border rounded-2xl px-4 py-2 w-full cursor-pointer"
             />
           </div>
 
@@ -201,3 +202,4 @@ const BookingForm = ({ handleSubmit }) => {
 };
 
 export default BookingForm;
+

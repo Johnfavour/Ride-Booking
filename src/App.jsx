@@ -21,9 +21,9 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-cover bg-center bg-gray-800" >
+    <div className="min-h-screen bg-cover bg-center bg-[url('/map.png')] bg-black" >
     <div className="container mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6 text-white flex items-center justify-center">RideIn</h1>
+      {/* <h1 className="text-3xl font-bold mb-6 flex items-center justify-center">RideIn</h1> */}
       {!bookingDetails || editing ? (
         <BookingForm handleSubmit={handleSubmit} />
       ) : (
@@ -42,4 +42,4 @@ const RootApp = () => (
 
 export default RootApp;
 
-
+// bg-gray-800

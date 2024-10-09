@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 const BookingSummary = ({ bookings, onEdit, onDelete, onNewBooking }) => {
   return (
     <div className="bg-gray-700 p-6 rounded-lg shadow-lg text-white">
-      <h2 className="text-2xl font-semibold text-gray-300 mb-4">Booking Summary</h2>
+      <h2 className="text-2xl font-semibold text-gray-300 mb-4">
+        Booking Summary
+      </h2>
       {bookings.length === 0 ? (
         <p className="text-gray-600">No bookings yet</p>
       ) : (

@@ -1,12 +1,12 @@
-import { createContext, useState } from 'react';
-import PropTypes from 'prop-types';
+import { createContext, useState } from "react";
+import PropTypes from "prop-types";
 
 export const BookingContext = createContext();
 
 export const BookingProvider = ({ children }) => {
   const [bookingDetails, setBookingDetails] = useState(null);
   BookingProvider.propTypes = {
-    children: PropTypes.node.isRequired,  
+    children: PropTypes.node.isRequired,
   };
 
   return (
@@ -14,5 +14,4 @@ export const BookingProvider = ({ children }) => {
       {children}
     </BookingContext.Provider>
   );
-
 };
